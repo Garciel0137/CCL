@@ -143,6 +143,20 @@ function draw() {
     } else {
       s = lerp(s, 0, 0.05);
     }
+    // Shoot balls only when clicked
+
   }
+  }
+  function mousePressed() {
+    if (mouseX <= 60) {
+      let spectre = map(mouseY, 0, 500, 0, 360);
+      balls.push({ x: 0, y: mouseY, color: spectre });
+    }
+    a = 0;
+  
+    if (mouseX >= 750 && mouseX <= 800 && mouseY >= 0 && mouseY <= 50) {
+      stage += 1
+      if (stage == 2){stage-=2} 
+    }
   }
 
