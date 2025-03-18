@@ -91,7 +91,7 @@ function draw() {
     beginShape();
     for (let i = 0; i < num; i++) {
       let angle = TWO_PI * (i / num);
-      let radius = shapeSize * 0.5 + noise(frameCount * 0.03 + i) * shapeSize * 0.3
+      let radius = shapeSize * 0.5 + noise(frameCount * 0.03 + i) * shapeSize * 0.15
       let vx = cos(angle) * radius;
       let vy = sin(angle) * radius;
       curveVertex(vx, vy);
