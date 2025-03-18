@@ -56,13 +56,14 @@ function draw() {
     }
   
     for (let i = 0; i < balls.length; i++) {
-      fill(balls[i].color, 100, 100);
+      fill(balls[i].color, balls[i].saturation, 100);
       ellipse(balls[i].x, balls[i].y, 30);
       balls[i].x += 1;
       let d = dist(balls[i].x, balls[i].y, x, y);
       if (d < 30) {
         h = balls[i].color;
         s = 100;
+        balls[i].saturation -=2
       if (balls[i].x > width) {
         balls.splice(i, 1);
         i--;
@@ -150,7 +151,7 @@ function draw() {
   function mousePressed() {
     if (mouseX <= 60) {
       let spectre = map(mouseY, 0, 500, 0, 360);
-      balls.push({ x: 0, y: mouseY, color: spectre });
+      balls.push({ x: 0, y: mouseY, color: spectre,saturation:100 });
     }
     a = 0;
   
