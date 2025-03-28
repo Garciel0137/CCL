@@ -18,7 +18,7 @@ function setup() {
   canvas.parent("p5-canvas-container");
 
   // ...except to adjust the dancer's name on the next line:
-  dancer = new YourNameDancer(width / 2, height / 2);
+  dancer = new Cowboy(width / 2, height / 2);
 }
 
 function draw() {
@@ -32,47 +32,120 @@ function draw() {
 
 // You only code inside this class.
 // Start by giving the dancer your name, e.g. LeonDancer.
-class YourNameDancer {
+class Cowboy {
   constructor(startX, startY) {
     this.x = startX;
     this.y = startY;
-    // add properties for your dancer here:
-    //..
-    //..
-    //..
   }
-  update() {
-    // update properties here to achieve
-    // your dancer's desired moves and behaviour
-  }
+
   display() {
-    // the push and pop, along with the translate 
-    // places your whole dancer object at this.x and this.y.
-    // you may change its position on line 19 to see the effect.
     push();
+    colorMode(RGB);
     translate(this.x, this.y);
+    scale(2); // Doubles the size of everything
+    noStroke();
 
-    // ******** //
-    // ⬇️ draw your dancer from here ⬇️
+    // Hat brim
+    fill(90, 60, 30);
+    push();
+    let shake = map(sin(frameCount * 0.3), -1, 1, PI / 80, -PI / 80);
+    rotate(shake);
+    rect(-5, -35, 38, 6);
 
+    // Hat top
+    fill(100, 70, 40);
+    rect(5, -45, 20, 10);
 
-
-
-
-
-    // ⬆️ draw your dancer above ⬆️
-    // ******** //
-
-    // the next function draws a SQUARE and CROSS
-    // to indicate the approximate size and the center point
-    // of your dancer.
-    // it is using "this" because this function, too, 
-    // is a part if your Dancer object.
-    // comment it out or delete it eventually.
-    this.drawReferenceShapes()
-
+    // Head
+    fill(230, 180, 140);
+    rect(5, -30, 20, 20);
+    fill(200, 150, 110);
+    rect(5, -30, 20, 5);
+    rect(5, -30, 8, 20);
+    fill(150, 100, 50);
+    rect(5, -30, 6, 8);
     pop();
+
+    // Body (shirt)
+    fill(180, 140, 100);
+    rect(5, -10, 20, 30);
+
+    // Arms
+    push();
+    translate(5, -10);
+    let angle = map(sin(frameCount * 0.1), -1, 1, PI / 2 + PI / 10, PI / 2 - PI / 10);
+    rotate(angle);
+    fill(230, 180, 140);
+    rect(0, 0, 5, 20);
+    rect(-15, 15, 15, 5);
+    pop();
+
+    push();
+    translate(23, -8);
+    rotate(-angle);
+    fill(230, 180, 140);
+    rect(0, 0, 5, 20);
+    rect(5, 15, 15, 5);
+    pop();
+
+    // Belt
+    fill(50, 30, 10);
+    rect(5, 10, 20, 5);
+
+    // Belt buckle
+    fill(200, 170, 50);
+    rect(15, 10, 6, 5);
+
+    // Vest
+    fill(90, 50, 20);
+    rect(3, -15, 10, 24);
+    rect(22, -15, 5, 24);
+    
+    // Gun pocket
+    rect(24,13,5,15);
+
+    // Pants
+    fill(50, 50, 80);
+    rect(5, 15, 20, 10);
+    push();
+    translate(5, 22);
+    let kick = -0.2 * PI + 0.2 * PI * sin(frameCount * 0.1);
+    rotate(kick);
+    rect(0, 0, 8, 22);
+    pop();
+    push();
+    translate(17, 22);
+    rotate(-kick - 0.5 * PI);
+    rect(0, 0, 8, 20);
+    pop();
+
+    push();
+    let x1 = 4.5 - sin(kick) * 18;
+    let y1 = 19 + cos(kick) * 18;
+    translate(x1, y1);
+    rotate(-kick / 2);
+    rect(0, 0, 8, 18);
+    fill(40, 20, 10);
+    rect(0, 18, 12, 5);
+    pop();
+
+    push();
+    let x2 = 15 - sin(-kick - 0.5 * PI) * 18;
+    let y2 = 18 + cos(-kick - 0.5 * PI) * 18;
+    translate(x2, y2);
+    rotate(kick / 2 + 0.25 * PI);
+    rect(0, 0, 8, 18);
+    fill(40, 20, 10);
+    rect(0, 18, 12, 5);
+    pop();
+
   }
+
+  update() {
+    this.x += sin(frameCount * 0.05);
+    this.y += sin(frameCount * 0.1);
+  }
+}
   drawReferenceShapes() {
     noFill();
     stroke(255, 0, 0);
