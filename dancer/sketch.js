@@ -145,7 +145,6 @@ class Cowboy {
     this.x += sin(frameCount * 0.05);
     this.y += sin(frameCount * 0.1);
   }
-}
   drawReferenceShapes() {
     noFill();
     stroke(255, 0, 0);
