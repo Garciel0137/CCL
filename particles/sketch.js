@@ -1,103 +1,127 @@
-/*
-  Check our the GOAL and the RULES of this exercise at the bottom of this file.
-  
-  After that, follow these steps before you start coding:
-
-  1. rename the dancer class to reflect your name (line 35).
-  2. adjust line 20 to reflect your dancer's name, too.
-  3. run the code and see if a square (your dancer) appears on the canvas.
-  4. start coding your dancer inside the class that has been prepared for you.
-  5. have fun.
-*/
-
-let dancer;
-
+let Stars = [];
+let cloud = [];
+let bgb = 100;
+let bgs = 40;
 function setup() {
-  // no adjustments in the setup function needed...
-  let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent("p5-canvas-container");
-
-  // ...except to adjust the dancer's name on the next line:
-  dancer = new YourNameDancer(width / 2, height / 2);
+  createCanvas(500, 500);
+  colorMode(HSB)
 }
 
 function draw() {
-  // you don't need to make any adjustments inside the draw loop
-  background(0);
-  drawFloor(); // for reference only
-
-  dancer.update();
-  dancer.display();
+  background(200,bgs,bgb);
+  for (let i=0; i<Stars.length; i++){
+    Stars[i].display();
+    Stars[i].update();
+  }
+  
+for (let i = 0; i < cloud.length; i++) {
+cloud[i].display();
+cloud[i].update();
+}
+if(mouseIsPressed){
+  cloud = []
+}
+  else{for (let i = cloud.length - 1; i >= 0; i--) {
+if (cloud[i].isGone == true) {
+cloud.splice(i, 1);
+}}
+}
+  
+  if (mouseIsPressed){
+    push()
+    for (let i=0; i<=5; i++){
+      Stars.push(new Star(0,0));
+    }
+    bgs = lerp(bgs,80,0.1);
+    bgb = lerp(bgb,0,0.04);
+    pop()
+}
+  else{
+    bgs = lerp(bgs,40,0.04);
+    bgb = lerp(bgb,100,0.04);
+    let sec = frameCount%130
+    if (sec == 1){cloud.push(new Cloud(0,random(0+80,height-80)))}
+  }
+  for (let i = Stars.length-1; i>=0; i--){
+    if (Stars[i].out){
+      Stars.splice(i,1);
+        }
+  }
 }
 
-// You only code inside this class.
-// Start by giving the dancer your name, e.g. LeonDancer.
-class YourNameDancer {
+//
+class Cloud {
   constructor(startX, startY) {
-    this.x = startX;
-    this.y = startY;
-    // add properties for your dancer here:
-    //..
-    //..
-    //..
-  }
-  update() {
-    // update properties here to achieve
-    // your dancer's desired moves and behaviour
+this.x = startX;
+this.y0 = startY;
+this.y = 0;
+this.s = random(50, 100);
+this.speedX = map(this.s, 50, 100, 2, 0.5);
+this.isGone = false;
   }
   display() {
-    // the push and pop, along with the translate 
-    // places your whole dancer object at this.x and this.y.
-    // you may change its position on line 19 to see the effect.
-    push();
-    translate(this.x, this.y);
-
-    // ******** //
-    // ⬇️ draw your dancer from here ⬇️
-
-
-
-
-
-
-    // ⬆️ draw your dancer above ⬆️
-    // ******** //
-
-    // the next function draws a SQUARE and CROSS
-    // to indicate the approximate size and the center point
-    // of your dancer.
-    // it is using "this" because this function, too, 
-    // is a part if your Dancer object.
-    // comment it out or delete it eventually.
-    this.drawReferenceShapes()
-
-    pop();
-  }
-  drawReferenceShapes() {
-    noFill();
-    stroke(255, 0, 0);
-    line(-5, 0, 5, 0);
-    line(0, -5, 0, 5);
-    stroke(255);
-    rect(-100, -100, 200, 200);
-    fill(255);
-    stroke(0);
+push();
+colorMode(HSB);
+translate(this.x, this.y);
+fill(200, 10, 100,5);
+noStroke();
+circle(0, 0, this.s);
+for (let angle = 0; angle < 2 * PI; angle += PI / 5) {
+push();
+rotate(angle);
+let s2 = map(noise(angle * this.s), 0, 1, this.s * 0.1, this.s);
+circle(this.s * 0.5, 0, s2);
+pop();
+}
+pop();
+}
+  update() {
+this.x = this.x + this.speedX;
+this.y = this.y0 + 100 * sin(noise(frameCount * 0.01));
+if (this.x > width * 1.1) {
+this.isGone = true;
+}
   }
 }
 
+class Star {
+  constructor(x,y){
+    this.x = random(mouseX-50,mouseX+50);
+    this.y = 0;
+    this.out = false;
+    this.speed = random(5,8);
+    let rank = random(1,40);
+    if (rank<1.35){
+      this.size = random (6,12)
+    }
+    else{
+    this.size = random (0.8,2.5)}
+  }
+  display(){
+    push();
+  translate(this.x, this.y);
+  fill(50,50,100);
+  noStroke();
+  beginShape();
+  for (let i = 0; i < 4; i++) {
+    let angle = TWO_PI * i / 4;
+    let outerX = cos(angle) * this.size*1.6;
+    let outerY = sin(angle) * this.size*2.2;
+    vertex(outerX, outerY);
 
-
-/*
-GOAL:
-The goal is for you to write a class that produces a dancing being/creature/object/thing. In the next class, your dancer along with your peers' dancers will all dance in the same sketch that your instructor will put together. 
-
-RULES:
-For this to work you need to follow one rule: 
-  - Only put relevant code into your dancer class; your dancer cannot depend on code outside of itself (like global variables or functions defined outside)
-  - Your dancer must perform by means of the two essential methods: update and display. Don't add more methods that require to be called from outside (e.g. in the draw loop).
-  - Your dancer will always be initialized receiving two arguments: 
-    - startX (currently the horizontal center of the canvas)
-    - startY (currently the vertical center of the canvas)
-  beside these, please don't add more parameters into the constructor function 
-  - lastly, to make sure our dancers will harmonize once on the same canvas, please don't make your dancer bigger than 200x200 pixels. 
-*/
+    let midAngle = angle + PI / 4;
+    let innerX = cos(midAngle) * this.size*0.8;
+    let innerY = sin(midAngle) * this.size;
+    vertex(innerX, innerY);
+  }
+  endShape(CLOSE);
+  pop()
+    
+  }
+  update(){
+    this.y = this.y+this.speed;
+    if (this.y > height){
+      this.out = true
+    }
+  }
+}
