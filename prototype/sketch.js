@@ -3,6 +3,7 @@ let Waves;
 let tide = 1;
 let Sea;
 let Quill;
+let stage = 0;
 function setup() {
   createCanvas(800, 500);
   Rock = new rock();
@@ -12,23 +13,23 @@ function setup() {
   Quill = new quill();
 }
 function preload(){
-  img1 = loadImage('rock.jpg');
-  img2 = loadImage('waves.jpg');
-  img3 = loadImage('surface.jpg');
-  img4 = loadImage('sheet.jpg');
-  img5 = loadImage('quill.jpg');
+  img1 = loadImage('pictures/rock.jpg');
+  img2 = loadImage('pictures/waves.jpg');
+  img3 = loadImage('pictures/surface.jpg');
+  img4 = loadImage('pictures/sheet.jpg');
+  img5 = loadImage('pictures/quill.jpg');
 }
 function draw() {
   background(220);
   Sea.display();
-  Sea.update();
+  
   Rock.display();
   Waves.display(); 
   Waves.update();
   Rock.smallRock();
-  Sheet.display();
-  Quill.display();
-  
+
+if (stage == 0){
+  Sea.update();
   fill('black')
   textFont('Courier New',45);
   textStyle(BOLD);
@@ -39,9 +40,16 @@ function draw() {
   text('a message to the future',32,252);
   text('on the water we roam today',32,280);
   text('Garciel Pu',32,360);
-  
-  if (mouseIsPressed){
-  console.log(mouseX,mouseY)}
+  text('Click to show the text',300,320);
+
+}
+
+if (stage == 1){
+    Sheet.display();
+    Quill.display();
+    text('Click to hide the text',20,450);
+}
+
 }
 ////////////////////
 class rock {
@@ -94,7 +102,7 @@ let r = (img2.pixels[i + 0]);
 let g = (img2.pixels[i + 1])
 let b = (img2.pixels[i + 2]);
 noStroke();
-fill(r+100,g+130,b+180,220);
+fill(r+100,g+130,b+180,200);
   let br = (r + g+b)/3;
   if (br>60){
     let waveX = x/6+5
@@ -105,7 +113,7 @@ fill(r+100,g+130,b+180,220);
 }
   }
   update(){
-  tide = 1 + sin(frameCount*0.07)*0.03
+  tide = 1 + sin(frameCount*0.05)*0.03
 }
 }
 ////////////////////
@@ -125,7 +133,7 @@ let g = (img3.pixels[i + 1])
 let b = (img3.pixels[i + 2]);
 noStroke();
 fill(r/4,g/1.3,b,180);  
-rect(1.2*x+this.x,1.3*y+this.y,10,10);
+rect(1.32*x+this.x,1.3*y+this.y,10,10);
 }
 }
   }
@@ -155,9 +163,14 @@ fill(r+50,g+40,b+40);
     rect(x, y ,6,6);
     fill('black');
     textFont('Georgia');
-    text('Dear earth,',125,200);
-    text('Today we shall be departed.' ,125,220,40)
-  pop()}
+    textSize(12);
+    text('Dear future mankind,',125,200);
+    text('If you come across this message, please be my guest and take a minute to hear this story.' ,125,250,200)
+    text('I am leaving this planet by the morning with the last spaceship. Before I depart, I want to leave behind some tales.' ,125,320,250)
+    text('They are tales from my time, which I grew up filling my dreams with. A time when we sailed on water and not space; a time when distance was not in lightyears but in kilometers, and the ocean is still seen as vast without boundaries.',125,375,250);
+    text('They are tales of the ocean, which you are now gazing upon.',125,490,300);
+    text('I am lucky that you are here to listen.',125,540,300);
+    pop()}
 }
 }
   }
@@ -186,3 +199,11 @@ fill(r+50,g+50,b+70);
 }
   }
 }
+
+function mousePressed() {
+ 
+    if (mouseX<600) {
+      stage += 1
+      if (stage == 2){stage-=2} 
+    }
+  }
