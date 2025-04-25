@@ -13,11 +13,11 @@ function setup() {
   Quill = new quill();
 }
 function preload(){
-  img1 = loadImage('pictures/rock.jpg');
-  img2 = loadImage('pictures/waves.jpg');
-  img3 = loadImage('pictures/surface.jpg');
-  img4 = loadImage('pictures/sheet.jpg');
-  img5 = loadImage('pictures/quill.jpg');
+  img1 = loadImage('rock.jpg');
+  img2 = loadImage('waves.jpg');
+  img3 = loadImage('surface.jpg');
+  img4 = loadImage('sheet.jpg');
+  img5 = loadImage('quill.jpg');
 }
 function draw() {
   background(220);
