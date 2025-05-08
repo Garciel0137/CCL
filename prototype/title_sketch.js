@@ -145,36 +145,62 @@ update(){
 }
 }
 ////////////////////
-class sheet{
-  display(){
+class sheet {
+  display() {
     img4.loadPixels(); //very important
-//image(img, 0, 0, width, height);
-for (let x = 0; x < img4.width; x += 5) {
-for (let y = 0; y < img4.height; y += 5) {
-let i = (x + y*img4.width) * 4;
-let r = (img4.pixels[i + 0]);
-let g = (img4.pixels[i + 1]);
-let b = (img4.pixels[i + 2]);
-noStroke();
-fill(r+50,g+40,b+40);
-  let br = (r + g + b)/3;
-  if (br<230){
-    push()
-    translate(550,-200);
-    rotate(PI/10);
-    rect(x, y ,6,6);
-    fill('black');
-    textFont('Georgia');
+    //image(img, 0, 0, width, height);
+    for (let x = 0; x < img4.width; x += 5) {
+      for (let y = 0; y < img4.height; y += 5) {
+        let i = (x + y * img4.width) * 4;
+        let r = img4.pixels[i + 0];
+        let g = img4.pixels[i + 1];
+        let b = img4.pixels[i + 2];
+        noStroke();
+        fill(r + 50, g + 40, b + 40);
+        let br = (r + g + b) / 3;
+        if (br < 230) {
+          push();
+          translate(550, -200);
+          rotate(PI / 10);
+          rect(x, y, 6, 6);
+
+          pop();
+        }
+      }
+    }
+    push();
+    translate(550, -200);
+    rotate(PI / 10);
+    fill("black");
+    textFont("Georgia");
     textSize(12);
-    text('Dear future mankind,',125,200);
-    text('If you come across this message, please be my guest and take a minute to hear this story.' ,125,250,200)
-    text('I am leaving this planet by the morning with the last spaceship. Before I depart, I want to leave behind some tales.' ,125,320,250)
-    text('They are tales from my time, which I grew up filling my dreams with. A time when we sailed on water and not space; a time when distance was not in lightyears but in kilometers, and the ocean is still seen as vast without boundaries.',125,375,250);
-    text('They are tales of the ocean, which you are now gazing upon.',125,490,300);
-    text('I am lucky that you are here to listen.',125,540,300);
-    pop()}
-}
-}
+    text("Dear future mankind,", 125, 200);
+    text(
+      "If you come across this message, please be my guest and take a minute to hear this story.",
+      125,
+      250,
+      200
+    );
+    text(
+      "I am leaving this planet by the morning with the last spaceship. Before I depart, I want to leave behind some tales.",
+      125,
+      320,
+      250
+    );
+    text(
+      "They are tales from my time, which I grew up filling my dreams with. A time when we sailed on water and not space; a time when distance was not in lightyears but in kilometers, and the ocean is still seen as vast without boundaries.",
+      125,
+      375,
+      250
+    );
+    text(
+      "They are tales of the ocean, which you are now gazing upon.",
+      125,
+      490,
+      300
+    );
+    text("I am lucky that you are here to listen.", 125, 540, 300);
+    pop();
   }
 }
 ////////////////////
