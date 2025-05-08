@@ -8,7 +8,7 @@ let stage = 0;
 let FishList = [];
 function setup() {
     let canvas = createCanvas(800, 500);
-    canvas.id("p5-canvas-title");
+    canvas.id("p5-canvas-fish");
     canvas.parent("p5-canvas-container");
   Rock = new rock();
   Waves = new waves();
