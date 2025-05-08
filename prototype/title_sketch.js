@@ -6,7 +6,7 @@ let Quill;
 let stage = 0;
 function setup() {
   let canvas = createCanvas(800, 500);
-    canvas.id("p5-canvas");
+    canvas.id("p5-canvas-title");
     canvas.parent("p5-canvas-container");
   Rock = new rock();
   Waves = new waves();
