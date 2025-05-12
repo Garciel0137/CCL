@@ -44,6 +44,7 @@ function draw() {
   Rock.smallRock();
 
   if (stage == 0) {
+    Sea.update();
     for (let i = 0; i < FishList.length; i++) {
     FishList[i].update();
     }
