@@ -18,7 +18,7 @@ function setup() {
   Sea = new sea();
   Sheet = new sheet();
   Quill = new quill();
-//  OceanSound.setLoop(true);
+  OceanSound.setLoop(true);
 }
 function preload() {
   img1 = loadImage("rock.jpg");
@@ -26,7 +26,7 @@ function preload() {
   img3 = loadImage("surface.jpg");
   img4 = loadImage("sheet.jpg");
   img5 = loadImage("quill.jpg");
-//  OceanSound = loadSound('OceanSound.mp3');
+  OceanSound = loadSound('OceanSound.mp3');
 }
 function draw() {
   background(220);
@@ -466,9 +466,9 @@ function keyPressed() {
 
 
 function mousePressed() {
-  // if (!OceanSound.isPlaying()){
-  //     OceanSound.play();
-  // }
+   if (!OceanSound.isPlaying()){
+       OceanSound.play();
+   }
   if (mouseX < 600) {
     stage += 1;
     if (stage == 3) {
