@@ -52,15 +52,13 @@ body {
 .canvas1Frame {
     width: 100% !important;
     height: 100%;    
-    display: block;
-    border: none;
+
 }
 
 .canvas2Frame {
     width: 100% !important;
     height: 100%;
-    display: block;
-    border: none;
+
 }
 
 iframe {
