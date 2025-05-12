@@ -19,7 +19,6 @@ function setup() {
   Sheet = new sheet();
   Quill = new quill();
   OceanSound.setLoop(true);
-  OceanSound.play();
 }
 function preload() {
   img1 = loadImage("rock.jpg");
