@@ -467,6 +467,9 @@ function keyPressed() {
 
 
 function mousePressed() {
+  if (!OceanSound.isPlaying()){
+      OceanSound.play();
+  }
   if (mouseX < 600) {
     stage += 1;
     if (stage == 3) {
