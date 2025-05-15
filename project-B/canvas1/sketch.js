@@ -4,6 +4,7 @@ let tide = 1;
 let Sea;
 let Quill;
 let stage = 0;
+let fontS;
 function setup() {
   let canvas = createCanvas(800, 500);
     canvas.id("p5-canvas-title");
@@ -20,6 +21,7 @@ function preload(){
   img3 = loadImage('surface.jpg');
   img4 = loadImage('sheet.jpg');
   img5 = loadImage('quill.jpg');
+  fontS = loadFont('Satisfy-Regular.ttf');
 }
 function draw() {
   background(220);
@@ -172,34 +174,34 @@ class sheet {
     translate(550, -200);
     rotate(PI / 10);
     fill("black");
-    textFont("Georgia");
-    textSize(12);
-    text("Dear future mankind,", 125, 200);
+    textFont(fontS);
+    textSize(16);
+    
     text(
       "If you come across this message, please be my guest and take a minute to hear this story.",
       125,
-      250,
+      230,
       200
     );
     text(
       "I am leaving this planet by the morning with the last spaceship. Before I depart, I want to leave behind some tales.",
       125,
-      320,
-      250
+      295,
+      220
     );
     text(
       "They are tales from my time, which I grew up filling my dreams with. A time when we sailed on water and not space; a time when distance was not in lightyears but in kilometers, and the ocean is still seen as vast without boundaries.",
       125,
-      375,
+      380,
       250
     );
     text(
       "They are tales of the ocean, which you are now gazing upon.",
       125,
-      490,
+      520,
       300
     );
-    text("I am lucky that you are here to listen.", 125, 540, 300);
+    text("I am lucky that you are here to listen.", 125, 570, 300);
     pop();
   }
 }
