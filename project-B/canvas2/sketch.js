@@ -9,6 +9,7 @@ let stage = 0;
 let OceanSound;
 let FishList = [];
 let BottleList = [];
+let fontS;
 function setup() {
     let canvas = createCanvas(800, 500);
     canvas.id("p5-canvas-fish");
@@ -19,6 +20,7 @@ function setup() {
   Sheet = new sheet();
   Quill = new quill();
   OceanSound.setLoop(true);
+  OceanSound.play();
 }
 function preload() {
   img1 = loadImage("rock.jpg");
@@ -27,6 +29,7 @@ function preload() {
   img4 = loadImage("sheet.jpg");
   img5 = loadImage("quill.jpg");
   OceanSound = loadSound('OceanSound.mp3');
+  fontS = loadFont('Satisfy-Regular.ttf');
 }
 function draw() {
   background(220);
@@ -39,11 +42,10 @@ function draw() {
     }
   Rock.display();
   Waves.display();
-  Waves.update();
-  Rock.smallRock();
-
+  
   if (stage == 0) {
     Sea.update();
+    Waves.update();
     for (let i = 0; i < FishList.length; i++) {
     FishList[i].update();
     }
@@ -58,6 +60,7 @@ function draw() {
     text("press F to create new fish and D to discard ", 30,460);
     text("press B to create a new bottle and X to discard ", 30,440);
     textSize(18);
+    
   }
 
   if (stage == 1 || stage == 2) {
@@ -189,33 +192,33 @@ class sheet {
       translate(550, -200);
       rotate(PI / 10);
       fill("black");
-      textFont("Georgia");
-      textSize(12);
+      textFont(fontS);
+      textSize(15);
 
       if (fishnum === 0) {
-        text("In poetry and books, the sea is vibrant—abundant, teeming with life, a place where countless sails set forth. It is the birthplace of life itself.", 125, 235, 200);
-        text("But now you don’t see life. Pollution, overfishing, warming, acidification… I can’t name all the reasons. I only know we’ve let it down.", 125, 320, 250);
+        text("In poetry and books, the sea is vibrant—abundant, teeming with life, a place where countless sails set forth. It is the birthplace of life itself.", 125, 210, 200);
+        text("But now you don’t see life. Pollution, overfishing, warming, acidification… I can’t name all the reasons. I only know we’ve let it down.", 125, 310, 250);
         text("I won’t live to see the sea a thousand years from now. The past can be recalled with evidence, but the future is a mere illusion. Maybe when you return, you’ll witness a billion new forms of life--because life always finds a way. And you’ll still have countless poems to write.", 125, 390, 250);
         text("Don't mourn the empty sea.", 125, 530, 300);
       } else if (fishnum <= 3) {
-        text("There are still some fish left in the sea. In waters laced with diesel and sunscreen, silver spines draw arcs through the waves.", 125, 200, 200);
-        text("The role of fishermen have long disappeared. If you want to know how they lived, read Hemingway. We rely on books now, too; history for history is still history.", 125, 280, 250);
-        text("A dozen years ago, children used to try fishing with a rod at dusk. Fishing was a sort of urban legend for them. They didn’t know their sinkers were dropping deeper than those dried bones of coral. When they heard adults talk about fish, they were curious what they looked like.", 125, 370, 250);
-        text("As I write this, I hear water stirring. I can’t say if this hope is real, or if I’m just longing too much for the image of having fish gliding past my boat hull.", 125, 510, 300);
+        text("There are still some fish left in the sea. In waters laced with diesel and sunscreen, silver spines draw arcs through the waves.", 120, 200, 200);
+        text("The role of fishermen have long disappeared. If you want to know how they lived, read Hemingway. We rely on books now, too; history for history is still history.", 120, 290, 250);
+        text("A dozen years ago, children used to try fishing with a rod at dusk. Fishing was a sort of urban legend for them. They didn’t know their sinkers were dropping deeper than those dried bones of coral. When they heard adults talk about fish, they were curious what they looked like.", 120, 370, 250);
+        text("As I write this, I hear water stirring. I can’t say if this hope is real, or if I’m just longing too much for the image of having fish gliding past my boat hull.", 120, 510, 300);
       } else if (fishnum <= 6) {
         text("I like rowing near the shore to watch fish and do nothing else. If there’s good weather and good luck, you might spot a school like this, casting a scatter of tiny shadows around your boat.", 125, 220, 200);
         text("Last summer, there was always a boy on the breakwater, practicing his cast. He’s never caught a fish—his line lands too close to shore. The sinker strikes the sand, where bits of coral bones lies like crushed stars.", 125, 340, 250);
         text("When the tide recedes, the beach is littered with broken shells. Each crack is a poem holding a half-finished sentence, but if you reach out and pick one up, it sings with its jagged edge: The waves here were once briny, salty, alive.", 125, 440, 250);
       } else if (fishnum <= 9) {
         text("The silver shadows grow denser each year. When sunlight cuts across the breakwater, you can see them stitching fine dotted lines beneath the surface.", 125, 200, 200);
-        text("I don’t believe the sea will ever truly die. We’re just the ones who must leave, leaving this blue moor to flourish on its own.", 125, 280, 220);
-        text("When the tide pulls back past the third rock, I see a shimmer of shadows trembling in a hollow of the reef. Twenty, thirty fish? Maybe forty or fifty? It doesn’t matter. What matters is the path they swim, mending the scars of nuclear war from decades past, stitching them into slow-healing wounds.", 125, 350, 250);
+        text("I don’t believe the sea will ever truly die. We’re just the ones who must leave, leaving this blue moor to flourish on its own.", 125, 290, 220);
+        text("When the tide pulls back past the third rock, I see a shimmer of shadows trembling in a hollow of the reef. They swam like needles in a cloth, mending the scars from a nuclear war decades past, stitching them into slow-healing wounds.", 125, 365, 250);
         text("Over the eastern cape, a flock of birds circles. When they dive, the surface erupts in silver spray. We no longer ride fishing boats—today’s vessels soar only into the sky—but the dock still stands. At night, you can hear the waves humming the chorus of old fishing songs under the moonlight.", 125, 490, 300);
       } else {
         text("Since the human evacuation was announced, the sea has seemed to celebrate its second birthday. Fish, once scarce, is now wandering and circling beneath the surface, vibrant once more.", 125, 200, 200);
         text("Before leaving, a group of students gathered on the beach, tossing crumbs of bread into the sea. One time a shadow actually did shot out like an arrow, grabbed a scrap, and sent a splash on the trousers of the boy kneeling closest to the water.", 125, 325, 250);
         text("Most noticeably, the tide sounds different now. It used to retreat like the tearing of old cloth. Now it crackles softly. At night, if you shine a flashlight into the the cracks in the reef, you’ll often see delicate flashes darting away.", 125, 450, 250);
-        text("As we part ways— may they thrive.", 125, 550, 300);
+        text("As we part ways, may they thrive.", 125, 565, 300);
       }
       pop();
     }
@@ -226,19 +229,19 @@ class sheet {
       translate(550, -200);
       rotate(PI / 10);
       fill("black");
-      textFont("Georgia");
-      textSize(12);
+      textFont(fontS);
+      textSize(15);
 
 if (bottlenum == 0) {
         text(
 `Before leaving, the last thing humanity did was clean up. Every remaining fishing boat was deployed, gliding across the surface—not to catch fish or shrimp, but to haul in plastic waste.
 
-It was only when we truly began the task that we realized it could actually be done. With the technology available, it took just a few months for the beaches to be freed from the grip of garbage.
-
-The ocean, once cleared of trash, looked almost unfamiliar. When the last plastic water bottle was pulled from the breakwater, it revealed the gray-green moss beneath—still alive, it turned out, only bleached from years beneath a plastic shell.
+It was only when we truly began the task that we realized it could actually be done. With the technology available, it took just a few months for the beaches to be freed from the grip of garbage.`,120,180,200)
+        text(
+`The ocean, once cleared of trash, looked almost unfamiliar. When the last plastic water bottle was pulled from the breakwater, it revealed the gray-green moss beneath, bleached from years beneath a plastic shell.
 
 It was the least we could do. And it was what the ocean deserved.`,
-          120, 180, 220
+          120, 450, 260
         );
       }
       else if (bottlenum <= 3) {
@@ -249,12 +252,10 @@ final volunteer cleanup:
 
 a symbolic gesture to make amends for the damage we had done, to leave behind remnants of civilization rather than scars.
 
-The most “precious” pieces of trash were placed in museums. They said future generations needed to know how foolish we had been, so a plastic water bottle from 2016 was kept as an exhibit—its label still advertising a once-popular island vacation.
-
 And now, the real ocean breathes beneath your feet. Its wounds are scabbed over in pale gold—sunlight, for the first time in decades, piercing down to the seafloor, awakening algal spores that had slumbered for years.
 
 On the final day, all the cleanup ships sounded their horns at dusk. Our work wasn’t finished, but time had run out. We had to leave.`,
-          120,180,240
+          120,200,240
         );
       }
       else if (bottlenum <= 6) {
@@ -263,8 +264,6 @@ On the final day, all the cleanup ships sounded their horns at dusk. Our work wa
 
 What couldn’t be broken down had become a second skin over the reefs. Shards of glass were wedged in the cracked belly of the breakwater, 
 leaking pale golden mucus with every crashing wave—as if, a century after civilization had faded, the ocean was still trying to digest the final bite of the industrial age.
-
-There was no rainbow sheen to the oil slicks. At high tide, only fragments of dull gray drifted in.
 
 The stench in the wind was unbearable, the product of a malformed ecosystem grown from waste. The imprint of humanity ran deep; even when life found a way, it no longer resembled its original form.
 
@@ -286,17 +285,15 @@ This is what the 21st century left behind: a postcard we can never bear to read 
       }
       else {  // bottlenum > 9
         text(
-`When I look out over the water, I feel thankful that I’m leaving at sunrise so I don’t have to face sights like this any longer.`,125,200,180)
+`When I look out over the water, I feel thankful that I’m leaving at sunrise so I don’t have to face sights like this any longer.`,125,210,180)
 
 text(`Ever since humanity decided to 
 depart, everyone seemed to give up the last traces of responsibility, letting the waste pile higher and deeper, hoping nature would somehow heal itself.
 
-The sea is hardly a sea anymore. In the gaps between the plastic, you can still catch flashes of blue—but that’s as far as it goes.
-
 What comes after Earth? If the next world ends up like this too, then what has our civilization really proven, other than its boundless selfishness and biological cunning in the name of survival?
 
 Perhaps one day we’ll return. But should we?`,
-          125,285,250
+          125,300,250
         );
       }
 
@@ -390,6 +387,7 @@ class bottle {
     this.w = 15;  
     this.h = 35;  
     this.time = random(1000);
+    this.m = random(1,2);
   }
 
   update() {
@@ -405,12 +403,13 @@ class bottle {
     rotate(radians(sway));
 
     noStroke();
-
-    // lid
+    
+    if (this.m < 1.58){
+    // 瓶盖
     fill(150, 200, 255);
     rect(-5, -this.h / 2 - 5, 10, 5, 2);
 
-    // upper half
+    // 上半瓶身（透明白）
     fill(255, 180);
     beginShape();
     vertex(-6, -this.h / 2);
@@ -419,7 +418,7 @@ class bottle {
     vertex(6, -this.h / 2);
     endShape(CLOSE);
 
-    // label
+    // 中间标签（浅蓝）
     fill(150, 200, 255, 200);
     beginShape();
     vertex(-7, -this.h / 4);
@@ -428,7 +427,7 @@ class bottle {
     vertex(7, -this.h / 4);
     endShape(CLOSE);
 
-    // bottom half
+    // 下半瓶身（透明白）
     fill(255, 180);
     beginShape();
     vertex(-5, 0);
@@ -437,6 +436,30 @@ class bottle {
     vertex(5, 0);
     endShape(CLOSE);
 
+    }
+    else {
+      fill(255, 255, 255, 140); // 半透明白色
+
+    // 塑料袋形状
+    beginShape();
+    vertex(-9, 0);
+    vertex(-16, -40);
+    vertex(-10, -50);
+    vertex(-6, -20);
+    vertex(12, -20);
+    vertex(10, -50);
+    vertex(20, -40);
+    vertex(30, 0);
+    vertex(30, 30);
+    vertex(5,40);
+    vertex(-30, 35);
+    endShape(CLOSE);
+
+    // 塑料袋标志（两个矩形）
+    fill(255, 150); // 深灰色
+    rect(-5, -5, 24, 5, 2);
+    rect(5, 5, 20, 5, 2);
+    }
     pop();
   }
 }
@@ -466,9 +489,9 @@ function keyPressed() {
 
 
 function mousePressed() {
-   if (!OceanSound.isPlaying()){
-       OceanSound.play();
-   }
+  if (!OceanSound.isPlaying()){
+    OceanSound.play();
+}
   if (mouseX < 600) {
     stage += 1;
     if (stage == 3) {
