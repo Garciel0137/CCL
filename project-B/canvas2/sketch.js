@@ -58,7 +58,7 @@ function draw() {
     textSize(18);
     text("Click to show the text", 30, 420);
     text("press F to create new fish and D to discard ", 30,460);
-    text("press B to create a new bottle and X to discard ", 30,440);
+    text("press B to create new waste and X to discard ", 30,440);
     textSize(18);
     
   }
